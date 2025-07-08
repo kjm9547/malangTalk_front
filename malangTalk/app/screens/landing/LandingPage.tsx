@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router'
 import { Button, Pressable, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import styled from 'styled-components/native'
 const Container = styled.SafeAreaView`
@@ -84,6 +85,10 @@ export default function LandingPage () {
             subTitle: "익명으로 안전하게 대화하세요"
         }
     ]
+    const router = useRouter();
+    const StartBtnHandler = () => {
+        router.push('/screens/landing/auth/LoginPage')
+    }
     return(
         <Container>
             <TitleText>말랑톡</TitleText>
@@ -105,10 +110,10 @@ export default function LandingPage () {
                 </RoundCard>
                 ))
             }
-            <StartBtn underlayColor={"#2563EB"} onPress={()=>console.log("???")}><BtnText>시작하기</BtnText></StartBtn>
+            <StartBtn underlayColor={"#2563EB"} onPress={StartBtnHandler}><BtnText>시작하기</BtnText></StartBtn>
         
           <LinkText>이미 계정이 있어요</LinkText>
-        <InfoText>지금 <Text></Text>1,247명이 말랑톡에서 대화 중이에요</InfoText>    
+        <InfoText>지금 <Text style={{color:'#2563EB'}}>1,247</Text>명이 말랑톡에서 대화 중이에요</InfoText>    
         </Container>
     )
     
