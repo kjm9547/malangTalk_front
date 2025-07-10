@@ -1,0 +1,19 @@
+{
+  "userInfo": {
+    "idToken": "",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "openid"
+    ],
+    "serverAuthCode": null,
+    "user": {
+      "email": "woals8115@gmail.com",
+      "familyName": "김",
+      "givenName": "재민",
+      "id": "110134254187707080870",
+      "name": "김재민",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocJ1f83KU21gildMJarqCybRQKZNj5QsxwegOiTH82DakNBebQ=s120"
+    }
+  }
+}
