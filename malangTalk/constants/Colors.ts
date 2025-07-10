@@ -14,6 +14,18 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+
+    title_text: "#111827",
+    subTitle_text : "#4B5563",
+    content_text:"#4B5563",
+
+    card_background: "#F9FAFB",
+
+    title_color_light: "#DBEAFE",
+    title_color_default: "#3B82F6",
+    title_color_hover: "#2563EB",
+    
+    white: "#ffffff",
   },
   dark: {
     text: '#ECEDEE',

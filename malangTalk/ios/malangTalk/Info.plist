@@ -31,6 +31,12 @@
           <string>com.anonymous.malangTalk</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.1052606356769-hipi72kqou2lgafuq9a9qd95vt3nr2k4</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>

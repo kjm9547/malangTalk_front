@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import { Button, Pressable, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import styled from 'styled-components/native'
 const Container = styled.SafeAreaView`
@@ -87,9 +87,13 @@ export default function LandingPage () {
     ]
     const router = useRouter();
     const StartBtnHandler = () => {
-        router.push('/screens/landing/auth/LoginPage')
+        router.push('/auth/LoginPage')
     }
     return(
+        <>
+        <Stack.Screen
+            options={{headerShown:false}}
+        />
         <Container>
             <TitleText>말랑톡</TitleText>
             <SubTitleText>전 세계 친구들과 말랑말랑한 대화</SubTitleText>
@@ -115,6 +119,7 @@ export default function LandingPage () {
           <LinkText>이미 계정이 있어요</LinkText>
         <InfoText>지금 <Text style={{color:'#2563EB'}}>1,247</Text>명이 말랑톡에서 대화 중이에요</InfoText>    
         </Container>
+        </>
     )
     
 }
