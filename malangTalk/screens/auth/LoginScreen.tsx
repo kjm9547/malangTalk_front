@@ -20,6 +20,7 @@ import {
   View,
 } from 'react-native';
 import axios from 'axios';
+import { router } from 'expo-router';
 
 type inputForm = {
   email: string;
@@ -94,6 +95,7 @@ const LoginScreen = () => {
     const res = await axios.post(targetUrl, fetchData);
     if (res.status === 200) {
       Alert.alert('로그인 성공!');
+      router.push('/main/MainPage'); // 로그인 성공 후 이동할 페이지
       // 회원가입 성공 후 추가 작업 (예: 로그인 페이지로 이동)
     } else {
       Alert.alert('회원가입에 실패했습니다. 다시 시도해주세요.');
