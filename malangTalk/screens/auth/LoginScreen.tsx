@@ -9,22 +9,25 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { useEffect, useState } from 'react';
 import {
+  Alert,
   Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableHighlight,
   View,
 } from 'react-native';
+import axios from 'axios';
+
 type inputForm = {
-  nickname: string;
   email: string;
   pw: string;
 };
+
 const LoginScreen = () => {
   const [inputForm, setInputForm] = useState<inputForm>({
-    nickname: '',
     email: '',
     pw: '',
   });
@@ -32,9 +35,7 @@ const LoginScreen = () => {
   useEffect(() => {
     GoogleSignin.configure();
   }, []);
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
@@ -57,6 +58,7 @@ const LoginScreen = () => {
           // some other error happened
         }
       } else {
+        handleSignUpButtonClick();
         // an error that's not related to google sign in occurred
       }
     }
@@ -64,8 +66,39 @@ const LoginScreen = () => {
   const handleInputFrom = (v: string, type: string) => {
     setInputForm((prev) => ({ ...prev, [type]: v }));
   };
-  const submitValidation = () => {};
-  const handleSignUpButtonClick = () => {};
+  const submitValidation = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!inputForm.email) {
+      Alert.alert('이메일을 입력해주세요');
+      return;
+    } else if (!inputForm.pw) {
+      Alert.alert('비밀번호를 입력해주세요');
+      return;
+    } else if (emailRegex.test(inputForm.email) === false) {
+      Alert.alert('올바른 이메일 형식을 입력해주세요');
+      return;
+    } else if (inputForm.pw.length < 8) {
+      Alert.alert('비밀번호는 8자 이상이어야 합니다');
+      return;
+    } else {
+      // 모든 입력이 유효한 경우 fetch
+      handleSignUpButtonClick();
+    }
+  };
+  const handleSignUpButtonClick = async () => {
+    const targetUrl = 'http://localhost:3000/login'; // 실제 회원가입 API URL로 변경해야 합니다.
+    const fetchData = {
+      email: inputForm.email,
+      pw: inputForm.pw,
+    };
+    const res = await axios.post(targetUrl, fetchData);
+    if (res.status === 200) {
+      Alert.alert('로그인 성공!');
+      // 회원가입 성공 후 추가 작업 (예: 로그인 페이지로 이동)
+    } else {
+      Alert.alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
   return (
     <ScrollView bounces={false}>
       <SafeAreaView style={styles.container}>
@@ -76,19 +109,7 @@ const LoginScreen = () => {
             새로운 친구들과 즐거운 대화를 시작해보세요
           </Text>
         </View>
-        <View style={styles.inputBox}>
-          <Text>닉네임</Text>
-          <TextInput
-            style={styles.inputFeild}
-            value={inputForm.nickname}
-            onChangeText={(v) => handleInputFrom(v, 'nickname')}
-            placeholder="사용할 닉네임을 입력하세요"
-            placeholderTextColor={Colors.light.placehorder_text}
-          />
-          <Text style={styles.infoText}>
-            다른 사용자들에게 보여질 이름이에요
-          </Text>
-        </View>
+
         <View style={styles.inputBox}>
           <Text>이메일</Text>
           <TextInput
@@ -108,13 +129,15 @@ const LoginScreen = () => {
             placeholder="비밀번호를 입력하세요"
             placeholderTextColor={Colors.light.placehorder_text}
           />
-          <Text style={styles.infoText}>
-            8자 이상의 안전한 비밀번호를 사용하세요
-          </Text>
+          <Text style={styles.infoText}>1</Text>
         </View>
-        <Pressable style={styles.signup_button}>
-          <Text style={styles.signup_button_text}>계정 만들기</Text>
-        </Pressable>
+        <TouchableHighlight
+          style={styles.signup_button}
+          underlayColor={Colors.light.title_color_hover}
+          onPress={submitValidation}
+        >
+          <Text style={styles.signup_button_text}>로그인하기</Text>
+        </TouchableHighlight>
         <View style={styles.seperate}>
           <SeperateLine styles={styles.seperateLine} />
           <Text style={styles.seperateText}>또는</Text>

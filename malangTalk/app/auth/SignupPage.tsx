@@ -1,19 +1,20 @@
-import LoginScreen from '@/screens/auth/LoginScreen';
+import SignupScreen from '@/screens/auth/SignupScreen';
 import { Stack } from 'expo-router';
 
-const LoginPage = () => {
+const SignupPage = () => {
+  // SignupPage 컴포넌트 내용
   return (
     <>
       <Stack.Screen
         options={{
-          title: '로그인',
+          title: '회원가입',
           headerStyle: { backgroundColor: '#2563EB' },
           headerTintColor: '#fff',
           headerTitleAlign: 'center',
         }}
       />
-      <LoginScreen />
+      <SignupScreen />
     </>
   );
 };
-export default LoginPage;
+export default SignupPage;
