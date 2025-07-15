@@ -8,6 +8,7 @@ export default function RootLayout() {
         headerStyle: { backgroundColor: '#2563EB' },
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
+        headerShown: false,
       }}
     />
   );

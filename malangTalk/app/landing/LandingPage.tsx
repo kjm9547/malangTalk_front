@@ -125,6 +125,9 @@ export default function LandingPage() {
           지금 <Text style={{ color: '#2563EB' }}>1,247</Text>명이 말랑톡에서
           대화 중이에요
         </InfoText>
+        <Pressable onPress={() => router.push('/(tabs)/MainTab')}>
+          <Text>메인 이동</Text>
+        </Pressable>
       </Container>
     </>
   );

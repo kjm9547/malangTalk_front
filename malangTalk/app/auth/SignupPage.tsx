@@ -11,6 +11,7 @@ const SignupPage = () => {
           headerStyle: { backgroundColor: '#2563EB' },
           headerTintColor: '#fff',
           headerTitleAlign: 'center',
+          headerShown: true,
         }}
       />
       <SignupScreen />
