@@ -1,8 +1,11 @@
+import { Colors } from '@/constants/Colors';
 import axios from 'axios';
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
   Alert,
   Image,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -26,6 +29,9 @@ const UsersScreen = () => {
       Alert.alert('사용자 데이터를 가져오는 데 실패했습니다.');
     }
   };
+  const userCardClickHandler = () => {
+    router.push('/chat/ChatRoomPage');
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -37,15 +43,23 @@ const UsersScreen = () => {
       <ScrollView>
         {userList.length > 0 &&
           userList.map((user, index) => (
-            <View>
+            <Pressable style={styles.user_card} onPress={userCardClickHandler}>
               <Image
                 source={{ uri: user.imgUrl }}
                 style={styles.card_user_img}
               />
-              <Text key={index} style={{ marginVertical: 5 }}>
-                {user.userName}
-              </Text>
-            </View>
+              <View>
+                <Text key={index} style={{ marginVertical: 5 }}>
+                  {user.userName}
+                </Text>
+
+                <View style={styles.user_message_box}>
+                  <Text key={index} style={{ marginVertical: 5 }}>
+                    안녕하세요
+                  </Text>
+                </View>
+              </View>
+            </Pressable>
           ))}
       </ScrollView>
     </SafeAreaView>
@@ -65,6 +79,18 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: '50%',
     marginRight: 10,
+  },
+  user_card: {
+    display: 'flex',
+    borderWidth: 1,
+    flexDirection: 'row',
+    borderColor: 'black',
+    width: '100%',
+    minHeight: 50,
+  },
+  user_message_box: {
+    width: 'auto',
+    color: Colors.light.content_text,
   },
 });
 export default UsersScreen;
